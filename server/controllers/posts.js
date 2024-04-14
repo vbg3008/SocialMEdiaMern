@@ -1,10 +1,15 @@
 import Post from "../models/Post.js";
 import User from "../models/User.js";
+import { w3Upload } from "../middleware/w3Upload.js";
+
 
 /* CREATE */
 export const createPost = async (req, res) => {
   try {
     const { userId, description, picturePath } = req.body;
+    console.log(picturePath);
+    let path = await w3Upload("public\\assets\\" + picturePath);
+    console.log(path);
     const user = await User.findById(userId);
     const newPost = new Post({
       userId,
@@ -12,8 +17,8 @@ export const createPost = async (req, res) => {
       lastName: user.lastName,
       location: user.location,
       description,
-      userPicturePath: user.picturePath,
-      picturePath,
+      userPicturePath: user.picturePath, 
+      picturePath: path,
       likes: {},
       comments: [],
     });
@@ -29,7 +34,7 @@ export const createPost = async (req, res) => {
 /* READ */
 export const getFeedPosts = async (req, res) => {
   try {
-    const post = await Post.find(); 
+    const post = await Post.find();
     res.status(200).json(post);
   } catch (err) {
     res.status(404).json({ message: err.message });

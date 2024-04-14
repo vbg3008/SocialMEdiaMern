@@ -1,6 +1,7 @@
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
+import { w3Upload } from "../middleware/w3Upload.js";
 
 /* REGISTER USER */
 export const register = async (req, res) => {
@@ -18,13 +19,18 @@ export const register = async (req, res) => {
 
     const salt = await bcrypt.genSalt();
     const passwordHash = await bcrypt.hash(password, salt);
+    console.log(picturePath);
+    let path = await w3Upload("\public\\assets\\"+picturePath)
+    console.log(path);
+   
+
 
     const newUser = new User({
       firstName,
       lastName,
       email,
       password: passwordHash,
-      picturePath,
+      picturePath :path,
       friends,
       location,
       occupation,
