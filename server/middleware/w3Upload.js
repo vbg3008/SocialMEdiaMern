@@ -3,14 +3,15 @@ import { readFileSync } from 'fs';
 
 const client = await create();
 // console.log(client);
+const myAccount = await client.login('vbgvbg76@gmail.com');
+console.log("trying to login");
+
+const space = await client.createSpace("my-testing-space"); //creating space
+
 export const  w3Upload = async (picturePath) => {
 
     try {
-        const myAccount = await client.login('vbgvbg76@gmail.com');
-        console.log("trying to login");
-    
-        const space = await client.createSpace("my-testing-space"); //creating space
-        
+       
         await myAccount.provision(space.did());// provisioninng space
         await space.save(); // saving space locally
         await client.setCurrentSpace(space.did());// setting current space locally
