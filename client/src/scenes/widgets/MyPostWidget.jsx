@@ -1,10 +1,10 @@
 import {
   EditOutlined,
   DeleteOutlined,
-  AttachFileOutlined,
-  GifBoxOutlined,
+  //AttachFileOutlined,
+  //GifBoxOutlined,
   ImageOutlined,
-  MicOutlined,
+  //MicOutlined,
   MoreHorizOutlined,
 } from "@mui/icons-material";
 import {
@@ -125,7 +125,7 @@ const MyPostWidget = ({ picturePath }) => {
           <ImageOutlined sx={{ color: mediumMain }} />
           <Typography
             color={mediumMain}
-            sx={{ "&:hover": { cursor: "pointer", color: medium } }}
+            sx={{ "&:hover": { cursor: "pointer", color: medium } , alignSelf: "center"}}
           >
             Image
           </Typography>
@@ -133,7 +133,7 @@ const MyPostWidget = ({ picturePath }) => {
 
         {isNonMobileScreens ? (
           <>
-            <FlexBetween gap="0.25rem">
+            {/* <FlexBetween gap="0.25rem">
               <GifBoxOutlined sx={{ color: mediumMain }} />
               <Typography color={mediumMain}>Clip</Typography>
             </FlexBetween>
@@ -146,7 +146,7 @@ const MyPostWidget = ({ picturePath }) => {
             <FlexBetween gap="0.25rem">
               <MicOutlined sx={{ color: mediumMain }} />
               <Typography color={mediumMain}>Audio</Typography>
-            </FlexBetween>
+            </FlexBetween> */}
           </>
         ) : (
           <FlexBetween gap="0.25rem">
