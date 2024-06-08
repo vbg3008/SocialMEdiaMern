@@ -2,7 +2,7 @@ import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
 import User from "../models/User.js";
 import { w3Upload } from "../middleware/w3Upload.js";
-import { storeForm } from "../middleware/sendContract.js";
+// import { storeForm } from "../middleware/sendContract.js";
 
 /* REGISTER USER */
 export const register = async (req, res) => {
@@ -23,16 +23,24 @@ export const register = async (req, res) => {
     console.log(picturePath);
     let path = await w3Upload("public\\assets\\" + picturePath);
     console.log(path);
+    fs.unlink("public\\assets\\"+picturePath, (err) => {
+      if (err) {
+        console.error(err);
+      } else {
+        console.log('File is deleted.');
+      }
+    });
 
-    await storeForm(
-      firstName,
-      lastName,
-      email,
-      password,
-      picturePath,
-      location,
-      occupation
-    );
+
+    // await storeForm(
+    //   firstName,
+    //   lastName,
+    //   email,
+    //   password,
+    //   picturePath,
+    //   location,
+    //   occupation
+    // );
 
     const newUser = new User({
       firstName,
